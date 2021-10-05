@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "22029903145",
+    "project_id": "mytiendita-bac56",
+    "storage_bucket": "mytiendita-bac56.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22029903145:android:cd29b4f90ffeffbf658338",
+        "android_client_info": {
+          "package_name": "com.lamarrulla.mytiendita"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22029903145-4dc908lck4em8j6o25lrfc3ammu2ueeo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lamarrulla.mytiendita",
+            "certificate_hash": "bf07380df98b7f83ebfb9fec751561f948834220"
+          }
+        },
+        {
+          "client_id": "22029903145-psi0lq27bqk618nem2o282asllismidj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuP6w3Q8kVG1R_WpXYDMwJHM_BW3Tykco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22029903145-psi0lq27bqk618nem2o282asllismidj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
