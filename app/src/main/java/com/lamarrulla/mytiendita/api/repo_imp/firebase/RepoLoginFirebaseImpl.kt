@@ -15,4 +15,8 @@ class RepoLoginFirebaseImpl(private val dsLoginFirebase: DsLoginFirebase):RepoLo
         return dsLoginFirebase.validaLoginFirebase();
     }
 
+    override suspend fun logoutFirebase(): Res<Boolean> {
+        return dsLoginFirebase.logoutLoginFirebase()
+    }
+
 }

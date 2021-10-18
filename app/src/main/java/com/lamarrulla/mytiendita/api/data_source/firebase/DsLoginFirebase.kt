@@ -41,6 +41,15 @@ class DsLoginFirebase(private val activity: Activity) {
         }
     }
 
+    suspend fun logoutLoginFirebase():Res<Boolean>{
+        try {
+            Firebase.auth.signOut()
+            return Res.Success(true)
+        }catch (ex:Exception){
+            return Res.Error(ex)
+        }
+    }
+
     suspend fun loginFirebase(loginReq:LoginReq): Res<LoginResp> {
         try {
             inicializaFirebase()

@@ -1,4 +1,4 @@
-package com.lamarrulla.mytiendita.ui.ui.home
+package com.lamarrulla.mytiendita.ui.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lamarrulla.mytiendita.databinding.FragmentHomeBinding
+import com.lamarrulla.mytiendita.utils.Utils
 
 class HomeFragment : Fragment() {
 
@@ -24,6 +25,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val utils = Utils(this.requireContext())
+        utils.showBarAndNavView()
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 

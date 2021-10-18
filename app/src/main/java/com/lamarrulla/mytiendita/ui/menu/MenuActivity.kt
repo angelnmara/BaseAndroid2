@@ -1,4 +1,4 @@
-package com.lamarrulla.mytiendita.ui.ui.menu
+package com.lamarrulla.mytiendita.ui.menu
 
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +14,7 @@ import com.lamarrulla.mytiendita.R
 import com.lamarrulla.mytiendita.api.data_source.firebase.DsLoginFirebase
 import com.lamarrulla.mytiendita.api.repo_imp.firebase.RepoLoginFirebaseImpl
 import com.lamarrulla.mytiendita.databinding.ActivityMenuBinding
+import com.lamarrulla.mytiendita.utils.Utils
 import com.lamarrulla.mytiendita.utils.VMFatory
 
 class MenuActivity : AppCompatActivity() {
@@ -27,7 +28,8 @@ class MenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        /*val utils = Utils(this)
+        utils.showBar()*/
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -50,6 +52,9 @@ class MenuActivity : AppCompatActivity() {
             result ?: return@Observer
             result.error?.let {
                 Log.d(TAG, result.error.toString())
+                navController.popBackStack(R.id.mobile_navigation, true)
+                navController.navigate(R.id.loginFragment)
+
             }
             result.success?.let {
                 Log.d(TAG, "usuario se logeo correctamente")

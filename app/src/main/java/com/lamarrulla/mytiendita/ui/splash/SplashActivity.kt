@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.lamarrulla.mytiendita.R
-import com.lamarrulla.mytiendita.ui.ui.menu.MenuActivity
+import com.lamarrulla.mytiendita.ui.menu.MenuActivity
 import com.lamarrulla.mytiendita.utils.Utils
 
 class SplashActivity : AppCompatActivity() {

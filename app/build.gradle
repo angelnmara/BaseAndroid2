@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("androidx.navigation.safeargs")
 }
 
 apply plugin: "kotlin-kapt"
@@ -8,6 +9,10 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdk 31
+
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.lamarrulla.mytiendita"
@@ -90,5 +95,10 @@ dependencies {
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:2.4.0-alpha09")
 
+    // databinding
+    kapt 'com.android.databinding:compiler:1.0-rc4'
+}
 
+kapt {
+    generateStubs = true
 }

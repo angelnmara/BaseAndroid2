@@ -7,4 +7,5 @@ import com.lamarrulla.mytiendita.data.model.response.LoginResp
 interface RepoLoginFirebase {
     suspend fun loginFirebase(loginReq: LoginReq): Res<LoginResp>
     suspend fun validaLoginFirebase():Res<LoginResp>
+    suspend fun logoutFirebase():Res<Boolean>
 }

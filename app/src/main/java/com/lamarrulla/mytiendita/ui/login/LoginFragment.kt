@@ -15,11 +15,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.lamarrulla.mytiendita.databinding.FragmentLoginBinding
 
 import com.lamarrulla.mytiendita.R
 import com.lamarrulla.mytiendita.api.data_source.firebase.DsLoginFirebase
 import com.lamarrulla.mytiendita.api.repo_imp.firebase.RepoLoginFirebaseImpl
+import com.lamarrulla.mytiendita.utils.Utils
 
 class LoginFragment : Fragment() {
 
@@ -35,7 +37,9 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        //utils.fullScreen(this.requireActivity().window)
+        val utils = Utils(this.requireContext())
+        utils.fullScreen(this.requireActivity().window)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -122,6 +126,8 @@ class LoginFragment : Fragment() {
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        val action = LoginFragmentDirections.actionLoginFragmentToMobileNavigation()
+        Navigation.findNavController(this.requireView()).navigate(action);
     }
 
     private fun showLoginFailed(@StringRes errorString: Int) {

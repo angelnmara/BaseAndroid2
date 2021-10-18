@@ -1,4 +1,4 @@
-package com.lamarrulla.mytiendita.ui.ui.menu
+package com.lamarrulla.mytiendita.ui.menu
 
 import com.lamarrulla.mytiendita.data.model.response.LoginResp
 
