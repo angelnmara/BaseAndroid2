@@ -19,4 +19,8 @@ class RepoLoginFirebaseImpl(private val dsLoginFirebase: DsLoginFirebase):RepoLo
         return dsLoginFirebase.logoutLoginFirebase()
     }
 
+    override suspend fun registerFirebase(loginReq: LoginReq): Res<LoginResp> {
+        return dsLoginFirebase.registerFirebase(loginReq)
+    }
+
 }

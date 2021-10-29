@@ -57,6 +57,7 @@ class LoginFragment : Fragment() {
         val passwordEditText = binding.password
         val loginButton = binding.login
         val loadingProgressBar = binding.loading
+        val register = binding.txtRegister
 
         loginViewModel.loginFormState.observe(viewLifecycleOwner,
             Observer { loginFormState ->
@@ -64,6 +65,7 @@ class LoginFragment : Fragment() {
                     return@Observer
                 }
                 loginButton.isEnabled = loginFormState.isDataValid
+                register.isEnabled = loginFormState.isDataValid
                 loginFormState.usernameError?.let {
                     usernameEditText.error = getString(it)
                 }
@@ -83,6 +85,19 @@ class LoginFragment : Fragment() {
                     updateUiWithUser(it)
                 }
             })
+
+        loginViewModel.registerResult.observe(viewLifecycleOwner, Observer {
+            registerResult ->
+            registerResult?: return@Observer
+            loadingProgressBar.visibility = View.GONE
+            registerResult.error?.let {
+                showLoginFailed(it)
+            }
+            registerResult.success?.let {
+                updateUiWithUser(it)
+            }
+        }
+        )
 
         val afterTextChangedListener = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
@@ -118,6 +133,10 @@ class LoginFragment : Fragment() {
                 usernameEditText.text.toString(),
                 passwordEditText.text.toString()
             )
+        }
+        register.setOnClickListener {
+            loadingProgressBar.visibility = View.VISIBLE
+            loginViewModel.register(usernameEditText.text.toString(), passwordEditText.text.toString())
         }
     }
 

@@ -2,8 +2,11 @@ package com.lamarrulla.mytiendita.api.data_source.firebase
 
 import android.app.Activity
 import android.util.Log
+import androidx.annotation.NonNull
 import androidx.compose.runtime.currentRecomposeScope
+import com.google.android.gms.tasks.Task
 import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -50,6 +53,31 @@ class DsLoginFirebase(private val activity: Activity) {
         }
     }
 
+    suspend fun registerFirebase(loginReq: LoginReq): Res<LoginResp>{
+        try {
+            inicializaFirebase()
+            auth.createUserWithEmailAndPassword(loginReq.user, loginReq.password)
+                .addOnCompleteListener(activity) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser!!
+                        loginResp = fillUser(user)
+                        //updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        //Toast.makeText(baseContext, "Authentication failed.",
+                          //  Toast.LENGTH_SHORT).show()
+                        //updateUI(null)
+                    }
+                }.await()
+        }catch (ex:Exception){
+            return Res.Error(ex)
+        }
+        return Res.Success(loginResp)
+    }
+
     suspend fun loginFirebase(loginReq:LoginReq): Res<LoginResp> {
         try {
             inicializaFirebase()
@@ -72,7 +100,7 @@ class DsLoginFirebase(private val activity: Activity) {
     }
 
     private fun fillUser(firebaseUser: FirebaseUser): LoginResp{
-        loginResp = LoginResp(
+        return LoginResp(
             idLoginResponse = 0,
             uid = firebaseUser.uid,
             email = firebaseUser.email,
@@ -82,6 +110,5 @@ class DsLoginFirebase(private val activity: Activity) {
             photoUrl = firebaseUser.photoUrl,
             providerId = firebaseUser.providerId
         )
-        return loginResp
     }
 }

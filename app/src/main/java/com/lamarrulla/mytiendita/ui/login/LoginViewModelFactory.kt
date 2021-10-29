@@ -21,7 +21,7 @@ class LoginViewModelFactory(private val repoLoginFirebase: RepoLoginFirebase, pr
                 loginRepository = LoginRepository(
                     //dataSource = LoginDataSource(),
                     repoLoginFirebase = RepoLoginFirebaseImpl(DsLoginFirebase(activity))
-                )
+                ), activity.applicationContext
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

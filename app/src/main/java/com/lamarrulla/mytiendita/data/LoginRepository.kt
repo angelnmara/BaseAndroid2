@@ -13,6 +13,8 @@ import java.lang.Exception
 
 class LoginRepository(val repoLoginFirebase: RepoLoginFirebase) {
 
+    private lateinit var loggedInUser:LoggedInUser;
+
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
         private set
@@ -31,19 +33,37 @@ class LoginRepository(val repoLoginFirebase: RepoLoginFirebase) {
         //dataSource.logout()
     }
 
-    suspend fun login(username: String, password: String): Res<LoggedInUser> {
-        // handle login
-        //val result = dataSource.login(username, password)
+    suspend fun register(username: String, password: String): Res<LoggedInUser>{
         lateinit var loggedInUser:LoggedInUser;
         val loginReq = LoginReq(
             user = username,
             password = password
         )
-        val resultado = repoLoginFirebase.loginFirebase(loginReq)
 
-        /*if (result is Res.Success) {
-            setLoggedInUser(result.data)
-        }*/
+        val resultado = repoLoginFirebase.registerFirebase(loginReq)
+
+        if(resultado is Res.Success){
+            loggedInUser = LoggedInUser(
+                userId = resultado.data .uid.toString(),
+                displayName = resultado.data.displayName.toString()
+            )
+            setLoggedInUser(loggedInUser)
+        }else{
+            return Res.Error((resultado as Res.Error).exception)
+        }
+
+        return Res.Success(loggedInUser);
+    }
+
+    suspend fun login(username: String, password: String): Res<LoggedInUser> {
+        // handle login
+        //val result = dataSource.login(username, password)
+
+        val loginReq = LoginReq(
+            user = username,
+            password = password
+        )
+        val resultado = repoLoginFirebase.loginFirebase(loginReq)
 
         if (resultado is Res.Success) {
             loggedInUser = LoggedInUser(

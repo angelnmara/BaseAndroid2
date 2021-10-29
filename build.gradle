@@ -6,7 +6,7 @@ task clean(type: Delete) {
 
 buildscript {
 
-    ext.android_plugin_version = '7.1.0-beta01'
+    ext.android_plugin_version = '7.1.0-beta02'
 
     repositories {
         // Check that you have the following line (if not, add it):

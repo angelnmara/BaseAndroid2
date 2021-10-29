@@ -8,4 +8,5 @@ interface RepoLoginFirebase {
     suspend fun loginFirebase(loginReq: LoginReq): Res<LoginResp>
     suspend fun validaLoginFirebase():Res<LoginResp>
     suspend fun logoutFirebase():Res<Boolean>
+    suspend fun registerFirebase(loginReq: LoginReq): Res<LoginResp>
 }
