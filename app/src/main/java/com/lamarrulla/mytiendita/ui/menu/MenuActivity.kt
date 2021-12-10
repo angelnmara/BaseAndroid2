@@ -57,6 +57,10 @@ class MenuActivity : AppCompatActivity() {
 
             }
             result.success?.let {
+                if(it.displayName==""){
+                    navController.popBackStack(R.id.mobile_navigation, true)
+                    navController.navigate(R.id.loginFragment)
+                }
                 Log.d(TAG, "usuario se logeo correctamente")
                 Log.d(TAG, it.displayName.toString());
             }

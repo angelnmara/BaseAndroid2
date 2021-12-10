@@ -1,6 +1,7 @@
 package com.lamarrulla.mytiendita.api.data_source.firebase
 
 import android.app.Activity
+import android.net.Uri
 import android.util.Log
 import androidx.annotation.NonNull
 import androidx.compose.runtime.currentRecomposeScope
@@ -10,6 +11,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.lamarrulla.mytiendita.data.Res
 import com.lamarrulla.mytiendita.data.model.request.LoginReq
@@ -97,6 +99,26 @@ class DsLoginFirebase(private val activity: Activity) {
             return Res.Error(ex)
         }
         return Res.Success(loginResp);
+    }
+
+    suspend fun updateProfile():Res<LoginResp>{
+        try {
+            val user = auth.currentUser
+            val profileUpdate = userProfileChangeRequest {
+                displayName = "dave"
+                photoUri= Uri.parse("https://example.com/jane-q-user/profile.jpg")
+            }
+            user!!.updateProfile(profileUpdate).addOnCompleteListener{
+                task->
+                if(task.isSuccessful){
+                    Log.d(TAG, "User profile updated")
+                    loginResp = fillUser(user)
+                }
+            }.await()
+        }catch (ex:Exception){
+            return Res.Error(ex)
+        }
+        return Res.Success(loginResp)
     }
 
     private fun fillUser(firebaseUser: FirebaseUser): LoginResp{

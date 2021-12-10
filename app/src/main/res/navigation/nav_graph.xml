@@ -15,7 +15,9 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_createUserFragment"
-            app:destination="@id/createUserFragment" />
+            app:destination="@id/createUserFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_loginFragment_to_mobile_navigation"
             app:destination="@id/mobile_navigation"
