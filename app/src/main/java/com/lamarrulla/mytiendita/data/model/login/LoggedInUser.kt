@@ -1,4 +1,4 @@
-package com.lamarrulla.mytiendita.data.model
+package com.lamarrulla.mytiendita.data.model.login
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

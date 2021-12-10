@@ -11,6 +11,10 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.lamarrulla.mytiendita.R
 import com.lamarrulla.mytiendita.ui.splash.SplashActivity
 
@@ -43,5 +47,9 @@ class Utils(private val context: Context) {
         var win: Window = activity.window
         win.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         (activity as AppCompatActivity).supportActionBar?.show()
+    }
+    fun inicializaFirebase(): FirebaseAuth{
+        FirebaseApp.initializeApp(activity.applicationContext);
+        return Firebase.auth
     }
 }

@@ -1,8 +1,10 @@
-package com.lamarrulla.mytiendita.data
+package com.lamarrulla.mytiendita.data.model.repository
 
-import android.util.Log
 import com.lamarrulla.mytiendita.api.repo.firebase.RepoLoginFirebase
-import com.lamarrulla.mytiendita.data.model.LoggedInUser
+import com.lamarrulla.mytiendita.api.repo.firebase.RepoProfileFirebase
+import com.lamarrulla.mytiendita.data.Res
+import com.lamarrulla.mytiendita.data.model.login.LoggedInUser
+import com.lamarrulla.mytiendita.data.model.login.LoggedProfile
 import com.lamarrulla.mytiendita.data.model.request.LoginReq
 import java.lang.Exception
 
@@ -13,7 +15,7 @@ import java.lang.Exception
 
 class LoginRepository(val repoLoginFirebase: RepoLoginFirebase) {
 
-    private lateinit var loggedInUser:LoggedInUser;
+    private lateinit var loggedInUser: LoggedInUser
 
     // in-memory cache of the loggedInUser object
     var user: LoggedInUser? = null
@@ -33,8 +35,8 @@ class LoginRepository(val repoLoginFirebase: RepoLoginFirebase) {
         //dataSource.logout()
     }
 
-    suspend fun register(username: String, password: String): Res<LoggedInUser>{
-        lateinit var loggedInUser:LoggedInUser;
+    suspend fun register(username: String, password: String): Res<LoggedInUser> {
+        lateinit var loggedInUser: LoggedInUser;
         val loginReq = LoginReq(
             user = username,
             password = password

@@ -1,18 +1,18 @@
 package com.lamarrulla.mytiendita.ui.login
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
 import androidx.lifecycle.viewModelScope
 import com.lamarrulla.mytiendita.R
-import com.lamarrulla.mytiendita.data.LoginRepository
+import com.lamarrulla.mytiendita.data.model.repository.LoginRepository
 import com.lamarrulla.mytiendita.data.Res
+import com.lamarrulla.mytiendita.data.model.repository.ProfileRepository
 import kotlinx.coroutines.launch
 
-class LoginViewModel(private val loginRepository: LoginRepository, private val context: Context) : ViewModel() {
+class LoginViewModel(private val loginRepository: LoginRepository, private val profileRepository: ProfileRepository ,private val context: Context) : ViewModel() {
 
     private val TAG = javaClass.name
     private val _loginForm = MutableLiveData<LoginFormState>()

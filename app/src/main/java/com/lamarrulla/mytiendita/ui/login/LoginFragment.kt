@@ -48,8 +48,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loginViewModel = ViewModelProvider(this, LoginViewModelFactory(
-            RepoLoginFirebaseImpl(DsLoginFirebase(this.requireActivity()))
-            , this.requireActivity()
+            this.requireActivity()
         ))
             .get(LoginViewModel::class.java)
 
@@ -94,7 +93,7 @@ class LoginFragment : Fragment() {
                 showLoginFailed(it)
             }
             registerResult.success?.let {
-                updateUiWithUser(it)
+                updateRegisterOk(it)
             }
         }
         )
@@ -145,7 +144,14 @@ class LoginFragment : Fragment() {
         // TODO : initiate successful logged in experience
         val appContext = context?.applicationContext ?: return
         Toast.makeText(appContext, welcome, Toast.LENGTH_LONG).show()
+        loginViewModel.registerResult
         val action = LoginFragmentDirections.actionLoginFragmentToMobileNavigation()
+        Navigation.findNavController(this.requireView()).navigate(action);
+    }
+
+    private fun updateRegisterOk(model: LoggedInUserView){
+        //val appContext = context?.applicationContext?: return
+        val action = LoginFragmentDirections.actionLoginFragmentToCreateUserFragment()
         Navigation.findNavController(this.requireView()).navigate(action);
     }
 

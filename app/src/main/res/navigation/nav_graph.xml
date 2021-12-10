@@ -5,7 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/mobile_navigation">
     <fragment
-        android:id="@+id/createUserFragment2"
+        android:id="@+id/createUserFragment"
         android:name="com.lamarrulla.mytiendita.ui.create_user.CreateUserFragment"
         android:label="CreateUserFragment" />
     <fragment
@@ -14,8 +14,8 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_createUserFragment2"
-            app:destination="@id/createUserFragment2" />
+            android:id="@+id/action_loginFragment_to_createUserFragment"
+            app:destination="@id/createUserFragment" />
         <action
             android:id="@+id/action_loginFragment_to_mobile_navigation"
             app:destination="@id/mobile_navigation"
